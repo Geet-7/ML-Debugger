@@ -21,3 +21,10 @@ def missing_percent(df):
 def class_coverage(df):
     class_coverage_arr = df.iloc[:, -1].value_counts(normalize=True)*100
     return class_coverage_arr.sort_values(ascending = False)
+
+#Correlation
+#the follwoing code is finding the correlation matrix of all the numeric variables
+def correlation_matrix(df):
+    df_numonly = df.select_dtypes(include = 'number')
+    corr_matrix = df_numonly.corr()
+    return(df_numonly.corr())

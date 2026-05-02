@@ -27,5 +27,21 @@ def max_class(df):
     elif 10 <= max_miss_per_val <= 30:
         return f"⚠️ Column {id_max_miss_per_val} has moderate missing data ({max_miss_per_val:.2f}%).  \nConsider applying imputation techniques."
     
-    else:
-        return f"Column {id_max_miss_per_val} has low missing data ({max_miss_per_val:.2f}%).  \nNo major issue."
+    
+#the following is to find classes with very hih correlation and flag them 
+def high_corr(df):
+    df_numonly = df.select_dtypes(include='number')
+    corr_mat = df_numonly.corr()
+    
+    high_corr_arr = []
+    cols = corr_mat.columns
+    
+    for i in range(len(cols)):
+        for j in range(i + 1, len(cols)):
+            val = corr_mat.iloc[i, j]
+            
+            if abs(val) >= 0.9:
+                high_corr_arr.append([cols[i], cols[j], val])
+    
+    return high_corr_arr
+
