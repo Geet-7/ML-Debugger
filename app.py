@@ -5,7 +5,11 @@ from utils import issues as issue_module
 issue_module.issues = []
 
 st.title("ML Debugger")
-file = st.file_uploader("Upload your dataset (CSV only): ",type = ["csv"])
+file = st.file_uploader(
+    "Upload your dataset (CSV only, max 25MB): ",
+    type=["csv"],
+    max_upload_size=25,
+)
 
 #data preview
 if file:
